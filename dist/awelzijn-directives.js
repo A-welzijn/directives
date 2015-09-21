@@ -289,7 +289,7 @@
       replace: true,
       transclude: true,
       link: function ($scope, $element, $attrs) {
-        $scope.tabNaam = $attrs.dgpNavTab;
+        $scope.tabNaam = $attrs.aWelzijnNavTab;
         if (angular.isDefined($attrs.start)) {
           $scope.$parent.ctrl.tabview = $scope.tabNaam;
         }
@@ -303,7 +303,7 @@
       restrict: 'A',
       scope: true,
       link: function ($scope, $element, $attrs) {
-        $scope.tabId = $attrs.dgpTabId;
+        $scope.tabId = $attrs.aWelzijnTabId;
         $scope.$watch("$parent.ctrl.tabview", function (value) {
           if (value) {
             if (value === $scope.tabId) {
@@ -317,22 +317,11 @@
     }
   }]);
 })();
-;'use strict';
-(function(module) {
-  try {
-    module = angular.module('awelzijn.directives');
-  } catch (e) {
-    module = angular.module('awelzijn.directives', []);
-  }
-  module.directive('aWelzijnScrollTo', [function () {
-    
-  }]);
-})();
 ;angular.module('awelzijn.directives').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('templates/overzichtlijst.html',
-    "<div> <div class=filterDiv></div> <div class=position-relative> <tink-interactive-table tink-headers=headers tink-data=resultaten tink-actions=actions tink-loading=loading tink-empty-message=\"Geen resultaten gevonden.\" tink-checked=boxChecked($data,$checked)> <table tink-sort-table=tinkData tink-callback=$parent.updateResultaten() tink-asc=$parent.pagingInfo.omgekeerd tink-init-sort-order=asc tink-sort-field=$parent.pagingInfo.sortering> <thead> <tr> <th tink-sort-header={{header.field}} ng-repeat=\"header in tinkHeaders\">{{header.alias}}</th> </tr> </thead> <tbody> <tr class=clickableTableRow ng-repeat=\"item in $parent.resultaten\" ng-click=$parent.$parent.rowClick(item)></tr> </tbody> </table> <tink-pagination tink-current-page=$parent.pagingInfo.huidigePagina tink-change=$parent.updateResultaten() tink-total-items=$parent.totaalAantal tink-items-per-page=$parent.pagingInfo.aantalPerPagina tink-items-per-page-values=[5,10,20]></tink-pagination> </tink-interactive-table> </div> </div>"
+    "<div> <div class=filterDiv></div> <div class=position-relative> <tink-interactive-table tink-headers=headers tink-data=resultaten tink-actions=actions tink-loading=loading tink-empty-message=\"Geen resultaten gevonden.\" tink-checked=boxChecked($data,$checked)> <table tink-sort-table=tinkData tink-callback=$parent.updateResultaten() tink-asc=$parent.pagingInfo.omgekeerd tink-init-sort-order=asc tink-sort-field=$parent.pagingInfo.sortering> <thead> <tr> <th tink-sort-header={{header.field}} ng-repeat=\"header in tinkHeaders\">{{header.alias}}</th> </tr> </thead> <tbody> <tr class=clickableTableRow ng-repeat=\"item in $parent.resultaten\" ng-click=$parent.$parent.rowClick(item)></tr> </tbody> </table> <tink-pagination ng-show=\"$parent.totaalAantal > 10\" tink-current-page=$parent.pagingInfo.huidigePagina tink-change=$parent.updateResultaten() tink-total-items=$parent.totaalAantal tink-items-per-page=$parent.pagingInfo.aantalPerPagina tink-items-per-page-values=[10,20,30]></tink-pagination> </tink-interactive-table> </div> </div>"
   );
 
 }]);

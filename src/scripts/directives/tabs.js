@@ -12,7 +12,7 @@
       replace: true,
       transclude: true,
       link: function ($scope, $element, $attrs) {
-        $scope.tabNaam = $attrs.dgpNavTab;
+        $scope.tabNaam = $attrs.aWelzijnNavTab;
         if (angular.isDefined($attrs.start)) {
           $scope.$parent.ctrl.tabview = $scope.tabNaam;
         }
@@ -26,7 +26,7 @@
       restrict: 'A',
       scope: true,
       link: function ($scope, $element, $attrs) {
-        $scope.tabId = $attrs.dgpTabId;
+        $scope.tabId = $attrs.aWelzijnTabId;
         $scope.$watch("$parent.ctrl.tabview", function (value) {
           if (value) {
             if (value === $scope.tabId) {
