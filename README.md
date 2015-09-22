@@ -59,9 +59,9 @@ Deze directive is gemaakt om overzicht-schermen in A-Welzijn op te maken. Met de
 #### ScrollTo
 
 ```html
-	<div a-welzijn-scroll-to="randomId"></div>
+<div a-welzijn-scroll-to="randomId"></div>
 	
-	<div id="randomId"></div>
+<div id="randomId"></div>
 ```
 Met deze directive gaat de pagina automatisch verder scrollen naar een bepaald element met de gedefinieerde id.
 
@@ -85,3 +85,20 @@ Met deze directive gaat de pagina automatisch verder scrollen naar een bepaald e
 Deze directive zorgt voor een gemakkelijke implementatie van tabs-navigatie. 
 Alle content gaat onder elkaar met een bepaalde tabId en deze content gaat dan getoggled worden d.m.v. de aangeklikte tab.
 De tab die bij het laden van de pagina open staat krijgt een 'start' attribuut.
+
+#### Inline Callout toggle
+
+```html
+<a-welzijn-toggle-callout label="Toelichting toevoegen">
+	<input type="text" />
+</a-welzijn-toggle-callout>
+```
+Deze directive genereert een inline callout die open- en dichtgeklapt kan worden.
+
+#### Rich textbox
+
+```html
+<rich-textbox ng-model="ctrl.text" maxlength="4000"></rich-textbox>
+```
+Spreekt voor zich...
+**Let op:** Indien je deze directive wil gebruiken moet je ook de CKEDITOR files in je project ingeladen hebben.
