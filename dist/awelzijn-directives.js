@@ -205,6 +205,43 @@
   } catch (e) {
     module = angular.module('awelzijn.directives', []);
   }
+  module.directive('aWelzijnNavigateOnClick', ['$state', function ($state) {
+    return {
+      restrict: 'E',
+      require: '?ngModel',
+      link: function (scope, element, attrs, ngModel) {
+        scope.ck = CKEDITOR.replace(element[0],
+          {
+            toolbarGroups: [
+              { name: 'basicstyles' }
+            ],
+            disableNativeSpellChecker: false,
+            removePlugins: 'liststyle,tabletools,scayt,menubutton,contextmenu,elementspath',
+            browserContextMenuOnCtrl: true
+          });
+
+        if (!ngModel) return;
+
+        scope.ck.on('pasteState', function () {
+          scope.$apply(function () {
+            ngModel.$setViewValue(scope.ck.getData());
+          });
+        });
+
+        ngModel.$render = function (value) {
+          scope.ck.setData(ngModel.$viewValue);
+        };
+      }
+    }
+  }]);
+})();
+;'use strict';
+(function (module) {
+  try {
+    module = angular.module('awelzijn.directives');
+  } catch (e) {
+    module = angular.module('awelzijn.directives', []);
+  }
   module.directive('aWelzijnScrollTo', ['aWelzijnScrollService', function (aWelzijnScrollService) {
     return {
       restrict: 'A',
@@ -317,11 +354,37 @@
     }
   }]);
 })();
+;'use strict';
+(function (module) {
+  try {
+    module = angular.module('awelzijn.directives');
+  } catch (e) {
+    module = angular.module('awelzijn.directives', []);
+  }
+  module.directive('aWelzijnNavigateOnClick', ['$state', function ($state) {
+    return {
+      restrict: 'E',
+      scope: true,
+      replace: true,
+      transclude: true,
+      link: function ($scope, $element, $attrs) {
+        $scope.label = $attrs.label;
+        $scope.open = false;
+      },
+      templateUrl: 'templates/togglecallout.html'
+    }
+  }]);
+})();
 ;angular.module('awelzijn.directives').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('templates/overzichtlijst.html',
     "<div> <div class=filterDiv></div> <div class=position-relative> <tink-interactive-table tink-headers=headers tink-data=resultaten tink-actions=actions tink-loading=loading tink-empty-message=\"Geen resultaten gevonden.\" tink-checked=boxChecked($data,$checked)> <table tink-sort-table=tinkData tink-callback=$parent.updateResultaten() tink-asc=$parent.pagingInfo.omgekeerd tink-init-sort-order=asc tink-sort-field=$parent.pagingInfo.sortering> <thead> <tr> <th tink-sort-header={{header.field}} ng-repeat=\"header in tinkHeaders\">{{header.alias}}</th> </tr> </thead> <tbody> <tr class=clickableTableRow ng-repeat=\"item in $parent.resultaten\" ng-click=$parent.$parent.rowClick(item)></tr> </tbody> </table> <tink-pagination ng-show=\"$parent.totaalAantal > 10\" tink-current-page=$parent.pagingInfo.huidigePagina tink-change=$parent.updateResultaten() tink-total-items=$parent.totaalAantal tink-items-per-page=$parent.pagingInfo.aantalPerPagina tink-items-per-page-values=[10,20,30]></tink-pagination> </tink-interactive-table> </div> </div>"
+  );
+
+
+  $templateCache.put('templates/togglecallout.html',
+    "<div class=\"toggle-callout col-lg-12\"> <a ng-click=\"open = !open\" href=\"\">{{label}} <i class=fa ng-class=\"{\\'fa-caret-up\\':open, \\'fa-caret-down\\':!open}\"></i></a> <div ng-show=open class=\"callout callout-inline\"> <div ng-transclude> </div> </div>"
   );
 
 }]);
