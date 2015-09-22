@@ -205,7 +205,7 @@
   } catch (e) {
     module = angular.module('awelzijn.directives', []);
   }
-  module.directive('aWelzijnNavigateOnClick', ['$state', function ($state) {
+  module.directive('aWelzijnRichTextbox', ['$state', function ($state) {
     return {
       restrict: 'E',
       require: '?ngModel',
@@ -361,7 +361,7 @@
   } catch (e) {
     module = angular.module('awelzijn.directives', []);
   }
-  module.directive('aWelzijnNavigateOnClick', ['$state', function ($state) {
+  module.directive('aWelzijnToggleCallout', ['$state', function ($state) {
     return {
       restrict: 'E',
       scope: true,
