@@ -1,2 +1,5 @@
 .position-relative {
   position: relative; }
+
+.row-selected {
+  background-color: #E8F5E9; }

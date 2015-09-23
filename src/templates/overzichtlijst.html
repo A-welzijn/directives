@@ -9,7 +9,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="clickableTableRow" ng-repeat="item in $parent.resultaten" ng-click="$parent.$parent.rowClick(item)"></tr>
+                    <tr class="clickableTableRow" ng-class="{'row-selected': item.checked}" ng-repeat="item in $parent.resultaten" ng-click="$parent.$parent.rowClick(item)"></tr>
                 </tbody>
             </table>
             <tink-pagination ng-show="$parent.totaalAantal > 10" tink-current-page="$parent.pagingInfo.huidigePagina" tink-change="$parent.updateResultaten()" tink-total-items="$parent.totaalAantal" tink-items-per-page="$parent.pagingInfo.aantalPerPagina" tink-items-per-page-values="[10,20,30]"></tink-pagination>
