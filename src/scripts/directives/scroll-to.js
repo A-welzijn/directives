@@ -10,11 +10,11 @@
       restrict: 'A',
       replace: false,
       scope: {
-        scrollTo: '@'
+        aWelzijnScrollTo: '@'
       },
       link: function (scope, element, attrs) {
         element.on('click', function () {
-          aWelzijnScrollService.scrollTo(scope.scrollTo);
+          aWelzijnScrollService.scrollTo(scope.aWelzijnScrollTo);
         });
       }
     };
