@@ -153,6 +153,7 @@
             };
 
             scope.updateResultaten = function () {
+              scope.loading = true;
               scope.getService();
               if (scope.serviceFunction) {
                 scope.service[scope.serviceFunction](scope.pagingInfo, scope.serviceParams).then(function (response) {
