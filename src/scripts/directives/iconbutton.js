@@ -13,9 +13,10 @@
       scope: {
         icon: '@',
         type: '@',
-        ngClick: '&'
+        ngClick: '&',
+        ngShow:'&'
       },
-      template: '<a class="btn icon-btn btn-{{type}}"><i class="fa {{icon}}"></i><span ng-transclude/></a>',
+      template: '<a class="btn icon-btn btn-{{type}}" ng-show=""><i class="fa {{icon}}"></i><span ng-transclude/></a>',
       link: function (scope, element, attrs) { }
     };
   }]);
