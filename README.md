@@ -39,6 +39,24 @@ Deze service gaat een message [broadcasten](https://docs.angularjs.org/api/ng/ty
 ```
 Deze directive laat toe om op een gemakkelijke manier te navigeren naar een bepaalde state, met parameters.
 
+#### Autocomplete
+
+```html
+//We are searching on the property name ! In the template below u have to put 'tinkArray' before the values !
+//data-a-welzijn-array: The array with the data
+//ngModel: This is the selected data
+//a-welzijn-filter-on: The property in the data you want to filter on
+//data-a-welzijn-highlight-length: the length
+<a-welzijn-autocomplete data-a-welzijn-highlight-length="1" a-welzijn-filter-on="name" ng-model="selectedValue" data-a-welzijn-array="data">
+	//use the filter on the property you want to filter and highlight !
+	<span ng-bind-html="aWelzijnArray.name | highlight"></span> - {{aWelzijnArray.age}}
+	<div>
+		nu kan ik dus extra info over een persoon zetten:
+		<br/>{{aWelzijnArray.extra}}
+	</div>
+</a-welzijn-autocomplete>
+```
+
 #### WelzijnTabel
 
 ```html
