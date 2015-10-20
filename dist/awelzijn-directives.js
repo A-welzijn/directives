@@ -5,6 +5,112 @@
   } catch (e) {
     module = angular.module('awelzijn.directives', []);
   }
+  module.directive('aWelzijnAutocomplete', ['$compile',function ($compile) {
+    return {
+      restrict: 'EA',
+      scope: {
+        ngModel: '=?',
+        aWelzijnHighlightLength:'=?',
+        aWelzijnArray:'=?',
+        aWelzijnFilterOn:'@'
+      },
+      transclude:true,
+      templateUrl: 'templates/autocomplete.html',
+      controller:function($scope){
+        var ctrl = this;
+        ctrl.inputValue = "";
+
+        $scope.$watch('aWelzijnArray',function(value){
+          ctrl.visibleData = value;
+        })
+        ctrl.inputChange = function(){
+
+        }
+
+        ctrl.keyUp = function(event){return false;
+
+        }
+
+        ctrl.keyDown = function(event){
+          var keyCode = event.which;
+          
+
+        }
+
+        ctrl.filterValues = function(data){
+          data = eval('data.'+$scope.aWelzijnFilterOn);
+          if(data && ctrl.inputValue !== '' && ctrl.inputValue && ctrl.inputValue.length >= $scope.aWelzijnHighlightLength){
+            try{
+              var inText = data.toLowerCase().indexOf(ctrl.inputValue.toLowerCase());
+              return inText > -1;
+            }catch(e) {
+              return false;
+            }
+          }
+          return false;
+        }
+
+        ctrl.setModelData = function($event,data){
+          $scope.ngModel = data;
+          ctrl.inputValue = eval('data.'+$scope.aWelzijnFilterOn);
+        };
+
+        //to see if the value is numeric
+        function isNumeric(n) {
+          return !isNaN(parseFloat(n)) && isFinite(n);
+        }
+
+
+        function init(){
+          if(!isNumeric(parseFloat($scope.aWelzijnHighlightLength))){
+            $scope.aWelzijnHighlightLength = 3;
+          }
+        }
+
+        init();
+      },
+      controllerAs:'ctrl',
+      link: function(scope,element,atrr,ctrl,transclude) {
+
+      var input = element.find('input');
+      input.focus(function(){
+        element.find('.list-autocomplete').addClass('show');
+      })
+      input.blur(function(){
+        element.find('.list-autocomplete').removeClass('show');
+      })
+
+      input.keydown(function(evt) {
+        return ctrl.keyDown(evt);
+      });
+
+      transclude(function(transcludeEl) {
+        var divTransclude = element.find('.list-result-autocomplete');
+        divTransclude.append(transcludeEl);
+        divTransclude.attr('ng-repeat',"aWelzijnArray in ctrl.visibleData | filter:ctrl.filterValues track by $index");
+        var html = divTransclude.html().replace('| highlight','| highlight:ctrl.inputValue');
+        divTransclude.html(html);
+        $compile(divTransclude)(scope);
+      });
+
+      }
+    };
+  }]).filter('highlight', function($sce) {
+    return function(text, phrase) {
+      if (phrase) text = text.replace(new RegExp('('+phrase+')', 'gi'),
+        '<mark>$1</mark>')
+
+      return $sce.trustAsHtml(text)
+    }
+  });
+})();
+;'use strict';
+(function (module) {
+  try {
+    module = angular.module('awelzijn.directives');
+  } catch (e) {
+    module = angular.module('awelzijn.directives', []);
+  }
   module.factory('aWelzijnBroadcastService', ['$rootScope', function ($rootScope) {
     function _send(message, data) {
       $rootScope.$broadcast(message, data);
@@ -419,6 +525,11 @@
 })();
 ;angular.module('awelzijn.directives').run(['$templateCache', function($templateCache) {
   'use strict';
+
+  $templateCache.put('templates/autocomplete.html',
+    "<div class=autocomplete> <input ng-keyup=ctrl.keyDown($event) ng-change=ctrl.inputChange() ng-model=ctrl.inputValue placeholder=\"\"> <ul class=list-autocomplete><li tabindex=0 class=list-result-autocomplete ng-mousedown=ctrl.setModelData($event,tinkArray)></li></ul> </div>"
+  );
+
 
   $templateCache.put('templates/overzichtlijst.html',
     "<div> <div class=filterDiv></div> <div class=position-relative> <tink-interactive-table tink-headers=headers tink-data=resultaten tink-actions=actions tink-loading=loading tink-empty-message=\"Geen resultaten gevonden.\" tink-checked=boxChecked($data,$checked)> <table tink-sort-table=tinkData tink-callback=$parent.updateResultaten() tink-asc=$parent.pagingInfo.omgekeerd tink-init-sort-order=asc tink-sort-field=$parent.pagingInfo.sortering> <thead> <tr> <th tink-sort-header={{header.field}} ng-repeat=\"header in tinkHeaders\">{{header.alias}}</th> </tr> </thead> <tbody> <tr class=clickableTableRow ng-class=\"{'row-selected': item.checked}\" ng-repeat=\"item in $parent.resultaten\" ng-click=$parent.$parent.rowClick(item)></tr> </tbody> </table> <tink-pagination ng-show=\"$parent.totaalAantal > 10\" tink-current-page=$parent.pagingInfo.huidigePagina tink-change=$parent.updateResultaten() tink-total-items=$parent.totaalAantal tink-items-per-page=$parent.pagingInfo.aantalPerPagina tink-items-per-page-values=[10,20,30]></tink-pagination> </tink-interactive-table> </div> </div>"
