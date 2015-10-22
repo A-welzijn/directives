@@ -5,7 +5,7 @@
             <table tink-sort-table="tinkData" tink-callback="$parent.updateResultaten()" tink-asc="$parent.pagingInfo.omgekeerd" tink-init-sort-order="asc" tink-sort-field="$parent.pagingInfo.sortering">
                 <thead>
                     <tr>
-                        <th tink-sort-header="{{header.field}}" ng-repeat="header in tinkHeaders">{{header.alias}}</th>
+                        <th tink-sort-header="{{header.sort}}" ng-repeat="header in tinkHeaders">{{header.alias}}</th>
                     </tr>
                 </thead>
                 <tbody>
