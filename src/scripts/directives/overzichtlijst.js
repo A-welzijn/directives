@@ -49,6 +49,7 @@
           post: function postlink(scope, element, attrs, ctrl, trans) {
 
             scope.$on('updateLijst', function (event, data) {
+              scope.pagingInfo.huidigePagina = 1,
               init();
             });
 
