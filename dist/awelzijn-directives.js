@@ -538,7 +538,7 @@
 
 
   $templateCache.put('templates/togglecallout.html',
-    "<div class=\"toggle-callout col-lg-12\"> <a ng-click=\"open = !open\" href=\"\">{{label}} <i class=fa ng-class=\"{\\'fa-caret-up\\':open, \\'fa-caret-down\\':!open}\"></i></a> <div ng-show=open class=\"callout callout-inline\"> <div ng-transclude> </div> </div>"
+    "<div class=\"toggle-callout col-lg-12\"> <a ng-click=\"open = !open\" href=\"\">{{label}} <i class=fa ng-class=\"{'fa-caret-up':open, 'fa-caret-down':!open}\"></i></a> <div ng-show=open class=\"callout callout-inline\"> <div ng-transclude> </div> </div>"
   );
 
 }]);
