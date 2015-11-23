@@ -138,7 +138,7 @@
         type: '@',
         ngClick: '&'
       },
-      template: '<a class="btn icon-btn btn-{{type}}"><i class="fa {{icon}}"></i><span ng-transclude/></a>',
+      template: '<a class="btn icon-btn btn-{{type}}"><i ng-if="icon" class="fa {{icon}}"></i><span ng-transclude/></a>',
       link: function (scope, element, attrs) { }
     };
   }]);
