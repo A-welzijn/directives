@@ -245,7 +245,9 @@
         detailId: "@",              // property-naam die de id van het rij-object bepaalt
         detailParams: "=?",	        // parameters die meegegeven worden bij navigatie naar object detail	
         loadDataOnInit: "=?",        // als 'false' laad geen data bij initialisatie; als niets meegegeven is, wordt data meteen geladen
-        actionOnSelect: "&"
+        actionOnSelect: "&",
+		defaultSortField: "@",		// default veldnaam waarop gesorteerd wordt
+		defaultSortInverse: "@"		// default instelling of er omgekeerd gesorteerd moet worden; als er niets wordt meegegeven, wordt er false gezet
       },
       templateUrl: 'templates/overzichtlijst.html',
       compile: function (telement, attrs) {
@@ -354,6 +356,11 @@
               scope.totaalAantal = 0;
               if (!scope.serviceParams) scope.serviceParams = { zoekterm: "" };
               if (scope.loadDataOnInit == null || scope.loadDataOnInit == undefined) scope.loadDataOnInit = true;
+			  
+			  if(scope.defaultSortField) scope.pagingInfo.sortering = scope.defaultSortField;
+			  
+			  if(scope.defaultSortInverse == null || scope.defaultSortInverse == undefined) scope.defaultSortInverse = false;
+			  scope.pagingInfo.omgekeerd = scope.defaultSortInverse;
               
               // intial actions
               if (scope.loadDataOnInit) scope.updateResultaten();
