@@ -36,7 +36,7 @@
         loadDataOnInit: "=?",        // als 'false' laad geen data bij initialisatie; als niets meegegeven is, wordt data meteen geladen
         actionOnSelect: "&",
 		defaultSortField: "@",		// default veldnaam waarop gesorteerd wordt
-		defaultSortInverse: "@"		// default instelling of er omgekeerd gesorteerd moet worden; als er niets wordt meegegeven, wordt er false gezet
+		defaultSortInverse: "@"		// default instelling of er omgekeerd gesorteerd moet worden; als er niets wordt meegegeven, wordt dit op true gezet
       },
       templateUrl: 'templates/overzichtlijst.html',
       compile: function (telement, attrs) {
@@ -148,10 +148,10 @@
 			  
 			  if(scope.defaultSortField) scope.pagingInfo.sortering = scope.defaultSortField;
 			  
-			  if(scope.defaultSortInverse == null || scope.defaultSortInverse == undefined) scope.defaultSortInverse = false;
+			  if(scope.defaultSortInverse == null || scope.defaultSortInverse == undefined) scope.defaultSortInverse = true;
 			  scope.pagingInfo.omgekeerd = scope.defaultSortInverse;
               
-              // intial actions
+              // initial actions
               if (scope.loadDataOnInit) scope.updateResultaten();
               if (!scope.loadDataOnInit) scope.loading = false;
             };
