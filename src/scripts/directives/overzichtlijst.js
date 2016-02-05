@@ -26,15 +26,14 @@
         actions: "=",               // actions voor tink-interactive-table
         serviceName: "@",           // service naam voor ophalen van de data
         serviceFunction: "@",       // functienaam van de service die aangeroepen moet worden
-        serviceParams: "=",         // extra parameters die meegegeven worden aan de serviceFunction
-        overzichtParentId: "=",
-        actionRefresh: "=",         // referentie naar actie om een refresh van data te triggeren; actie wordt ingevuld door directive en opgeroepen door externe controller
-        actionGetSelected: "=",     // referentie naar actie om geselecteerde rijen op te halen; ; actie wordt ingevuld door directive en opgeroepen door externe controller
+        serviceParams: "=?",         // extra parameters die meegegeven worden aan de serviceFunction
+        actionRefresh: "=?",         // referentie naar actie om een refresh van data te triggeren; actie wordt ingevuld door directive en opgeroepen door externe controller
+        actionGetSelected: "=?",     // referentie naar actie om geselecteerde rijen op te halen; ; actie wordt ingevuld door directive en opgeroepen door externe controller
         actionRowClicked: "&",      // referentie naar actie van controller om een row-click-event op te vangen; als er niets is meegegeven wordt er default naar het detail van het object gegaan (zie "detailState" param); lege functie meegegeven als er geen actie nodig is
         detailState: "@",           // state-naam om het detail van een geselecteerde rij te bezien/behandelen
         detailId: "@",              // property-naam die de id van het rij-object bepaalt
-        detailParams: "=",	        // parameters die meegegeven worden bij navigatie naar object detail	
-        loadDataOnInit: "=",        // als 'false' laad geen data bij initialisatie, als niets meegegeven is wordt data meteen geladen
+        detailParams: "=?",	        // parameters die meegegeven worden bij navigatie naar object detail	
+        loadDataOnInit: "=?",        // als 'false' laad geen data bij initialisatie; als niets meegegeven is, wordt data meteen geladen
         actionOnSelect: "&"
       },
       templateUrl: 'templates/overzichtlijst.html',
@@ -138,16 +137,16 @@
 
             init();
             function init() {
+              // initialize scope params
               scope.loading = true;
               scope.resultaten = null;
               scope.totaalAantal = 0;
               if (!scope.serviceParams) scope.serviceParams = { zoekterm: "" };
-              if (scope.loadDataOnInit != false) {
-                scope.updateResultaten();
-              }
-              if (scope.loadDataOnInit == false) {
-                scope.loading = false;
-              }
+              if (scope.loadDataOnInit == null || scope.loadDataOnInit == undefined) scope.loadDataOnInit = true;
+              
+              // intial actions
+              if (scope.loadDataOnInit) scope.updateResultaten();
+              if (!scope.loadDataOnInit) scope.loading = false;
             };
           }
         }
