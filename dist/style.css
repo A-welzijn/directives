@@ -3,3 +3,41 @@
 
 .row-selected {
   background-color: #E8F5E9; }
+
+.dossierRelatie {
+  padding: 10px;
+  margin-left: 0 !important;
+  margin-right: 0 !important; }
+
+.dossierRelatie h4 {
+  margin: 0; }
+
+.dossierRelatie > div:first-child {
+  margin-bottom: 15px; }
+
+.dossierRelatie p {
+  margin: 3px 0;
+  font-size: .9em;
+  overflow: hidden; }
+
+.dossierRelatie p.dossierLabel {
+  font-weight: 600;
+  color: black;
+  font-size: .8em;
+  margin: .3em 0 0 0; }
+
+.dossierRelatie p:empty:before {
+  content: "-"; }
+
+.dossierRelatie span.lidmaatschap {
+  padding: 3px 5px 3px 5px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  font-size: .7em;
+  background-color: #EFFCF3;
+  border: 1px solid #537e62;
+  color: #537e62; }
+
+.dossierRelatie span.lidmaatschap i {
+  font-size: .9em;
+  margin-left: .5em; }
