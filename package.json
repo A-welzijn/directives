@@ -1,7 +1,7 @@
 {
   "name": "awelzijn-directives",
   "description": "A-Welzijn directives",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "repository": {
     "type": "git",
     "url": "git@github.com:A-welzijn/directives.git"

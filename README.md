@@ -1,6 +1,6 @@
 # A-Welzijn Directives
 
-v1.0.22
+v1.0.23
 
 ### Hoe het te gebruiken
 
