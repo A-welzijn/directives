@@ -158,7 +158,7 @@
             scope: {
                 sleutel: '=',
                 voornaam: '=',
-                familienaam: '='
+                naam: '='
             },
             controllerAs: 'ctrl',
             templateUrl: 'templates/klantfiche.html',
