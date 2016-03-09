@@ -1,11 +1,46 @@
 <div>
-	<div class="dossierRelatie">
+	<div class="dossierRelatie" ng-show="ctrl.loading">
 		<div class="row">
 			<div class="col-md-12">
 				<h4>{{ctrl.naam}}, {{ctrl.voornaam}}</h4>
 			</div>
 			<div class="col-md-12 margin-top-sm">
-				<span class="lidmaatschap">{{ctrl.dossier.relatie != null ? ctrl.dossier.relatie : ctrl.dossier.lidmaatschap}} <i class="fa" ng-class="{'fa-venus': ctrl.dossier.geslacht == 'v', 'fa-mars': ctrl.dossier.geslacht == 'm' }"></i></span>
+				<span class="lidmaatschap">
+                    Laden...
+                </span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<p class="dossierLabel">Adres</p>
+				<p>Laden...</p>
+			</div>
+			<div class="col-md-6">
+				<p class="dossierLabel">Geboortedatum</p>
+				<p>Laden...</p>
+
+				<p class="dossierLabel">Geboorteplaats</p>
+				<p>Laden...</p>
+			</div>
+			<div class="col-md-6">
+				<p class="dossierLabel">Telefoon</p>
+				<p>Laden...</p>
+
+				<p class="dossierLabel">E-mail</p>
+				<p>Laden...</p>
+			</div>
+		</div>
+	</div>
+	<div class="dossierRelatie" ng-show="!ctrl.loading">
+		<div class="row">
+			<div class="col-md-12">
+				<h4>{{ctrl.naam}}, {{ctrl.voornaam}}</h4>
+			</div>
+			<div class="col-md-12 margin-top-sm">
+				<span class="lidmaatschap">
+                    {{ctrl.dossier.relatie != null ? ctrl.dossier.relatie : ctrl.dossier.lidmaatschap}} 
+                    <i class="fa" ng-class="{'fa-venus': ctrl.dossier.geslacht == 'v', 'fa-mars': ctrl.dossier.geslacht == 'm' }"></i>
+                </span>
 				<span style="font-size:.8em; color:grey; margin-left:.5em;">INSZ {{ctrl.dossier.inszNummer | insz}}</span>
 			</div>
 		</div>
