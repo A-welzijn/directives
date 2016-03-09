@@ -171,7 +171,7 @@
 
 				ctrl.popoverOpened = function () {
 					ctrl.loading = true;
-					var httpConfig = { method: 'GET', url: appConfig.welzijnKlant + 'dossiers/klant/sleutel/' + ctrl.sleutel };
+					var httpConfig = { method: 'GET', url: appConfig.welzijnKlant + 'dossier/' + ctrl.sleutel };
 					$http(httpConfig).then(function (data) {
 						ctrl.dossier = data.data.klant;
 					}, function (data) { }).finally(function () {
